@@ -47,7 +47,7 @@ class ToDoList {
     if (title instanceof ToDo) {
       this.todos.push(title);
     } else {
-      this.todos.push(new ToDo(title));
+      throw new TypeError('Cannot add object; type must be ToDo');
     }
   }
 
@@ -76,22 +76,22 @@ class ToDoList {
   }
 
   itemAt(position) {
-    this._validateIndex(position--);
+    this._validateIndex(--position);
     return this.todos[position];
   }
 
   removeAt(position) {
-    this._validateIndex(position--);
-    return this.todos.splice(position - 1, 1)[0];
+    this._validateIndex(--position);
+    return this.todos.splice(position, 1)[0];
   }
 
   markDoneAt(position) {
-    this._validateIndex(position--);
+    this._validateIndex(--position);
     this.todos[position].markDone();
   }
 
   markNotDoneAt(position) {
-    this._validateIndex(position--);
+    this._validateIndex(--position);
     this.todos[position].markNotDone();
   }
 
@@ -172,3 +172,5 @@ class ToDoList {
     }
   }
 }
+
+module.exports = { ToDo, ToDoList };
